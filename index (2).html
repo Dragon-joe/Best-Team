@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Team - إدارة الفريق</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh; 
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container { 
+            max-width: 1400px; 
+            margin: 0 auto; 
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+        }
+
+        .header h1 { 
+            font-size: 3rem; 
+            font-weight: 800;
+            background: linear-gradient(90deg, #e94560, #ff6b6b, #feca57);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-shadow: none;
+        }
+
+        .header p {
+            color: #a0a0a0;
+            font-size: 1.1rem;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #e94560;
+        }
+
+        .stat-label {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .team-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); 
+            gap: 30px;
+        }
+
+        .member-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 30px;
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #e94560, #0f3460);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .member-card:hover { 
+            transform: translateY(-8px);
+            border-color: rgba(233, 69, 96, 0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+        }
+
+        .member-card:hover::before {
+            opacity: 1;
+        }
+
+        .member-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .avatar {
+            width: 70px; 
+            height: 70px;
+            background: linear-gradient(135deg, #e94560, #0f3460);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 800;
+            box-shadow: 0 8px 25px rgba(233, 69, 96, 0.3);
+            flex-shrink: 0;
+        }
+
+        .member-info h3 { 
+            font-size: 1.3rem; 
+            color: #fff;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .member-role { 
+            color: #e94560; 
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .info-section { 
+            margin-bottom: 18px; 
+        }
+
+        .info-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #feca57;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .info-label i {
+            font-size: 1.1rem;
+        }
+
+        .info-box {
+            background: rgba(0,0,0,0.2);
+            border-radius: 12px;
+            padding: 15px;
+            color: #ccc;
+            line-height: 1.8;
+            border-right: 3px solid #e94560;
+            font-size: 0.95rem;
+        }
+
+        .accounts-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-profile {
+            background: linear-gradient(135deg, #0f3460, #16213e);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-profile:hover {
+            background: linear-gradient(135deg, #16213e, #1a1a2e);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(15, 52, 96, 0.4);
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            color: #fff;
+        }
+
+        .btn-edit:hover {
+            background: linear-gradient(135deg, #ff6b6b, #e94560);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(233, 69, 96, 0.4);
+        }
+
+        .add-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 2rem;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .add-btn:hover { 
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.6);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: modalSlide 0.3s ease;
+        }
+
+        @keyframes modalSlide {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            background: #e94560;
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            color: #feca57;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 14px 18px;
+            color: #fff;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #e94560;
+            box-shadow: 0 0 20px rgba(233, 69, 96, 0.2);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn-save {
+            flex: 1;
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            color: #fff;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
+        }
+
+        .btn-cancel {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            color: #888;
+            padding: 14px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-cancel:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        .profile-modal .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile-modal .avatar-large {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #e94560, #0f3460);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 0 auto 15px;
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+        }
+
+        .profile-detail {
+            background: rgba(0,0,0,0.2);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-right: 3px solid #e94560;
+        }
+
+        .profile-detail-label {
+            color: #feca57;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .profile-detail-value {
+            color: #ccc;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2rem; }
+            .team-grid { grid-template-columns: 1fr; }
+            .stats-bar { gap: 15px; }
+            .stat-item { padding: 15px 25px; }
+            .modal { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Best Team</h1>
+            <p>نظام إدارة الفريق المتكامل</p>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number" id="totalMembers">3</div>
+                <div class="stat-label">عدد الأعضاء</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="totalAccounts">14</div>
+                <div class="stat-label">إجمالي الحسابات</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="activeProjects">5</div>
+                <div class="stat-label">مشاريع نشطة</div>
+            </div>
+        </div>
+
+        <div class="team-grid" id="teamGrid"></div>
+    </div>
+
+    <button class="add-btn" onclick="openAddModal()" title="إضافة عضو جديد">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- Edit Modal -->
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('editModal')"><i class="fas fa-times"></i></button>
+            <h2 class="modal-title">✏️ تعديل بيانات العضو</h2>
+            <form id="editForm">
+                <input type="hidden" id="editId">
+                <div class="form-group">
+                    <label class="form-label">👤 الاسم الكامل</label>
+                    <input type="text" class="form-input" id="editName" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">💼 المسمى الوظيفي</label>
+                    <input type="text" class="form-input" id="editRole" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">🎯 الـ Prompt الخاص</label>
+                    <textarea class="form-textarea" id="editPrompt" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">📋 خطة العمل</label>
+                    <textarea class="form-textarea" id="editPlan" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">👤 عدد الحسابات</label>
+                    <input type="number" class="form-input" id="editAccounts" min="0" required>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-save"><i class="fas fa-save"></i> حفظ التعديلات</button>
+                    <button type="button" class="btn-cancel" onclick="closeModal('editModal')">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="modal-overlay profile-modal" id="profileModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('profileModal')"><i class="fas fa-times"></i></button>
+            <div class="profile-header">
+                <div class="avatar-large" id="profileAvatar">أ</div>
+                <h2 class="modal-title" id="profileName" style="margin-bottom:5px;"></h2>
+                <p style="color:#e94560; font-weight:600;" id="profileRole"></p>
+            </div>
+            <div class="profile-detail">
+                <div class="profile-detail-label"><i class="fas fa-bullseye"></i> الـ Prompt الخاص</div>
+                <div class="profile-detail-value" id="profilePrompt"></div>
+            </div>
+            <div class="profile-detail">
+                <div class="profile-detail-label"><i class="fas fa-tasks"></i> خطة العمل</div>
+                <div class="profile-detail-value" id="profilePlan"></div>
+            </div>
+            <div class="profile-detail">
+                <div class="profile-detail-label"><i class="fas fa-users"></i> الحسابات</div>
+                <div class="profile-detail-value">
+                    <span class="accounts-badge" id="profileAccounts"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let members = [
+            {
+                id: 1,
+                name: "أحمد محمد",
+                role: "مطور رئيسي",
+                prompt: "خبير في تطوير الويب باستخدام React و Node.js، متخصص في بناء APIs RESTful وقواعد البيانات NoSQL. يمتلك خبرة 5 سنوات في تطوير التطبيقات الكبيرة.",
+                plan: "1. تطوير الواجهة الأمامية باستخدام React\n2. ربط API بالخلفية\n3. اختبار الأداء والأمان\n4. تحسين تجربة المستخدم",
+                accounts: 5
+            },
+            {
+                id: 2,
+                name: "سارة علي",
+                role: "مصممة UI/UX",
+                prompt: "مصممة إبداعية متخصصة في تصميم واجهات المستخدم وتجربة المستخدم، خبيرة في Figma و Adobe XD. تهتم بأدق التفاصيل في التصميم.",
+                plan: "1. إنشاء wireframes\n2. تصميم النماذج التفاعلية\n3. تحسين تجربة المستخدم\n4. إعداد دليل التصميم",
+                accounts: 3
+            },
+            {
+                id: 3,
+                name: "خالد عمر",
+                role: "مدير المشروع",
+                prompt: "مدير مشروع محترف بخبرة 7 سنوات في إدارة الفرق التقنية. متخصص في Agile و Scrum. يمتلك مهارات قيادية عالية في توجيه الفرق نحو النجاح.",
+                plan: "1. وضع خطة المشروع\n2. توزيع المهام على الفريق\n3. متابعة التقدم اليومي\n4. التواصل مع العملاء",
+                accounts: 6
+            }
+        ];
+
+        function renderMembers() {
+            const grid = document.getElementById('teamGrid');
+            grid.innerHTML = '';
+
+            let totalAccounts = 0;
+
+            members.forEach(member => {
+                totalAccounts += parseInt(member.accounts);
+
+                const card = document.createElement('div');
+                card.className = 'member-card';
+                card.innerHTML = `
+                    <div class="member-header">
+                        <div class="avatar">${member.name.charAt(0)}</div>
+                        <div class="member-info">
+                            <h3>${member.name}</h3>
+                            <div class="member-role">${member.role}</div>
+                        </div>
+                    </div>
+                    <div class="info-section">
+                        <div class="info-label"><i class="fas fa-bullseye"></i> الـ Prompt الخاص</div>
+                        <div class="info-box">${member.prompt.substring(0, 100)}${member.prompt.length > 100 ? '...' : ''}</div>
+                    </div>
+                    <div class="info-section">
+                        <div class="info-label"><i class="fas fa-tasks"></i> خطة العمل</div>
+                        <div class="info-box">${member.plan.substring(0, 80)}${member.plan.length > 80 ? '...' : ''}</div>
+                    </div>
+                    <div class="info-section">
+                        <div class="info-label"><i class="fas fa-users"></i> الحسابات</div>
+                        <span class="accounts-badge"><i class="fas fa-user-circle"></i> ${member.accounts} حساب</span>
+                    </div>
+                    <div class="card-actions">
+                        <button class="btn btn-profile" onclick="openProfile(${member.id})">
+                            <i class="fas fa-user"></i> عرض الملف
+                        </button>
+                        <button class="btn btn-edit" onclick="openEditModal(${member.id})">
+                            <i class="fas fa-edit"></i> تعديل
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            document.getElementById('totalMembers').textContent = members.length;
+            document.getElementById('totalAccounts').textContent = totalAccounts;
+        }
+
+        function openProfile(id) {
+            const member = members.find(m => m.id === id);
+            if (!member) return;
+
+            document.getElementById('profileAvatar').textContent = member.name.charAt(0);
+            document.getElementById('profileName').textContent = member.name;
+            document.getElementById('profileRole').textContent = member.role;
+            document.getElementById('profilePrompt').textContent = member.prompt;
+            document.getElementById('profilePlan').innerHTML = member.plan.replace(/\n/g, '<br>');
+            document.getElementById('profileAccounts').innerHTML = `<i class="fas fa-user-circle"></i> ${member.accounts} حساب`;
+
+            document.getElementById('profileModal').classList.add('active');
+        }
+
+        function openEditModal(id) {
+            const member = members.find(m => m.id === id);
+            if (!member) return;
+
+            document.getElementById('editId').value = member.id;
+            document.getElementById('editName').value = member.name;
+            document.getElementById('editRole').value = member.role;
+            document.getElementById('editPrompt').value = member.prompt;
+            document.getElementById('editPlan').value = member.plan;
+            document.getElementById('editAccounts').value = member.accounts;
+
+            document.getElementById('editModal').classList.add('active');
+        }
+
+        function openAddModal() {
+            document.getElementById('editId').value = '';
+            document.getElementById('editName').value = '';
+            document.getElementById('editRole').value = '';
+            document.getElementById('editPrompt').value = '';
+            document.getElementById('editPlan').value = '';
+            document.getElementById('editAccounts').value = '';
+            document.querySelector('#editModal .modal-title').textContent = '➕ إضافة عضو جديد';
+            document.getElementById('editModal').classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+            if (modalId === 'editModal') {
+                setTimeout(() => {
+                    document.querySelector('#editModal .modal-title').textContent = '✏️ تعديل بيانات العضو';
+                }, 300);
+            }
+        }
+
+        document.getElementById('editForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const id = document.getElementById('editId').value;
+            const name = document.getElementById('editName').value;
+            const role = document.getElementById('editRole').value;
+            const prompt = document.getElementById('editPrompt').value;
+            const plan = document.getElementById('editPlan').value;
+            const accounts = document.getElementById('editAccounts').value;
+
+            if (id) {
+                // Edit existing member
+                const member = members.find(m => m.id == id);
+                if (member) {
+                    member.name = name;
+                    member.role = role;
+                    member.prompt = prompt;
+                    member.plan = plan;
+                    member.accounts = accounts;
+                }
+            } else {
+                // Add new member
+                const newId = members.length > 0 ? Math.max(...members.map(m => m.id)) + 1 : 1;
+                members.push({
+                    id: newId,
+                    name, role, prompt, plan, accounts
+                });
+            }
+
+            renderMembers();
+            closeModal('editModal');
+        });
+
+        // Close modal on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.classList.remove('active');
+                }
+            });
+        });
+
+        // Initial render
+        renderMembers();
+    </script>
+</body>
+</html>
