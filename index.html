@@ -7,11 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body { 
             font-family: 'Cairo', sans-serif; 
@@ -21,10 +17,7 @@
             color: #fff;
         }
 
-        .container { 
-            max-width: 1400px; 
-            margin: 0 auto; 
-        }
+        .container { max-width: 1400px; margin: 0 auto; }
 
         .header {
             text-align: center;
@@ -40,13 +33,9 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 10px;
-            text-shadow: none;
         }
 
-        .header p {
-            color: #a0a0a0;
-            font-size: 1.1rem;
-        }
+        .header p { color: #a0a0a0; font-size: 1.1rem; }
 
         .stats-bar {
             display: flex;
@@ -65,16 +54,8 @@
             backdrop-filter: blur(10px);
         }
 
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #e94560;
-        }
-
-        .stat-label {
-            color: #888;
-            font-size: 0.9rem;
-        }
+        .stat-number { font-size: 2rem; font-weight: 800; color: #e94560; }
+        .stat-label { color: #888; font-size: 0.9rem; }
 
         .team-grid { 
             display: grid; 
@@ -96,9 +77,7 @@
         .member-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 4px;
             background: linear-gradient(90deg, #e94560, #0f3460);
             opacity: 0;
@@ -111,9 +90,7 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.4);
         }
 
-        .member-card:hover::before {
-            opacity: 1;
-        }
+        .member-card:hover::before { opacity: 1; }
 
         .member-header {
             display: flex;
@@ -125,8 +102,7 @@
         }
 
         .avatar {
-            width: 70px; 
-            height: 70px;
+            width: 70px; height: 70px;
             background: linear-gradient(135deg, #e94560, #0f3460);
             border-radius: 20px;
             display: flex;
@@ -139,22 +115,10 @@
             flex-shrink: 0;
         }
 
-        .member-info h3 { 
-            font-size: 1.3rem; 
-            color: #fff;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
+        .member-info h3 { font-size: 1.3rem; color: #fff; font-weight: 700; margin-bottom: 4px; }
+        .member-role { color: #e94560; font-size: 0.9rem; font-weight: 600; }
 
-        .member-role { 
-            color: #e94560; 
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .info-section { 
-            margin-bottom: 18px; 
-        }
+        .info-section { margin-bottom: 18px; }
 
         .info-label {
             display: flex;
@@ -164,10 +128,6 @@
             font-weight: 700;
             margin-bottom: 10px;
             font-size: 0.95rem;
-        }
-
-        .info-label i {
-            font-size: 1.1rem;
         }
 
         .info-box {
@@ -240,6 +200,19 @@
             box-shadow: 0 8px 25px rgba(233, 69, 96, 0.4);
         }
 
+        .btn-delete {
+            background: rgba(255,255,255,0.05);
+            color: #ff6b6b;
+            border: 1px solid rgba(255,107,107,0.2);
+            padding: 10px 15px;
+            font-size: 0.85rem;
+        }
+
+        .btn-delete:hover {
+            background: rgba(255,107,107,0.15);
+            transform: translateY(-2px);
+        }
+
         .add-btn {
             position: fixed;
             bottom: 30px;
@@ -268,10 +241,7 @@
         /* Modal Styles */
         .modal-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0,0,0,0.8);
             backdrop-filter: blur(10px);
             display: none;
@@ -281,9 +251,7 @@
             padding: 20px;
         }
 
-        .modal-overlay.active {
-            display: flex;
-        }
+        .modal-overlay.active { display: flex; }
 
         .modal {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
@@ -305,34 +273,22 @@
 
         .modal-close {
             position: absolute;
-            top: 20px;
-            left: 20px;
+            top: 20px; left: 20px;
             background: rgba(255,255,255,0.1);
             border: none;
             color: #fff;
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border-radius: 50%;
             cursor: pointer;
             font-size: 1.2rem;
             transition: all 0.3s;
         }
 
-        .modal-close:hover {
-            background: #e94560;
-            transform: rotate(90deg);
-        }
+        .modal-close:hover { background: #e94560; transform: rotate(90deg); }
 
-        .modal-title {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 25px;
-            color: #fff;
-        }
+        .modal-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 25px; color: #fff; }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+        .form-group { margin-bottom: 20px; }
 
         .form-label {
             display: block;
@@ -360,10 +316,7 @@
             box-shadow: 0 0 20px rgba(233, 69, 96, 0.2);
         }
 
-        .form-textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
+        .form-textarea { min-height: 120px; resize: vertical; }
 
         .form-actions {
             display: flex;
@@ -404,10 +357,7 @@
             transition: all 0.3s;
         }
 
-        .btn-cancel:hover {
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-        }
+        .btn-cancel:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
         .profile-modal .profile-header {
             text-align: center;
@@ -415,8 +365,7 @@
         }
 
         .profile-modal .avatar-large {
-            width: 100px;
-            height: 100px;
+            width: 100px; height: 100px;
             background: linear-gradient(135deg, #e94560, #0f3460);
             border-radius: 24px;
             display: flex;
@@ -446,10 +395,71 @@
             gap: 8px;
         }
 
-        .profile-detail-value {
-            color: #ccc;
-            line-height: 1.8;
+        .profile-detail-value { color: #ccc; line-height: 1.8; }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: linear-gradient(135deg, #e94560, #ff6b6b);
+            color: white;
+            padding: 16px 35px;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 10px 40px rgba(233, 69, 96, 0.4);
+            z-index: 2000;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* Data Controls */
+        .data-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #ccc;
+            padding: 10px 25px;
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .control-btn:hover {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .control-btn.export { color: #4ecdc4; border-color: rgba(78, 205, 196, 0.2); }
+        .control-btn.export:hover { background: rgba(78, 205, 196, 0.1); }
+
+        .control-btn.import { color: #feca57; border-color: rgba(254, 202, 87, 0.2); }
+        .control-btn.import:hover { background: rgba(254, 202, 87, 0.1); }
+
+        .control-btn.reset { color: #ff6b6b; border-color: rgba(255, 107, 107, 0.2); }
+        .control-btn.reset:hover { background: rgba(255, 107, 107, 0.1); }
+
+        .file-input { display: none; }
 
         @media (max-width: 768px) {
             .header h1 { font-size: 2rem; }
@@ -457,29 +467,45 @@
             .stats-bar { gap: 15px; }
             .stat-item { padding: 15px 25px; }
             .modal { padding: 25px; }
+            .data-controls { gap: 10px; }
+            .control-btn { padding: 8px 18px; font-size: 0.85rem; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>🚀 Best Team</h1>
-            <p>نظام إدارة الفريق المتكامل</p>
+            <p>نظام إدارة الفريق المتكامل - يحفظ البيانات تلقائياً</p>
         </div>
 
         <div class="stats-bar">
             <div class="stat-item">
-                <div class="stat-number" id="totalMembers">3</div>
+                <div class="stat-number" id="totalMembers">0</div>
                 <div class="stat-label">عدد الأعضاء</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number" id="totalAccounts">14</div>
+                <div class="stat-number" id="totalAccounts">0</div>
                 <div class="stat-label">إجمالي الحسابات</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number" id="activeProjects">5</div>
+                <div class="stat-number" id="activeProjects">0</div>
                 <div class="stat-label">مشاريع نشطة</div>
             </div>
+        </div>
+
+        <div class="data-controls">
+            <button class="control-btn export" onclick="exportData()">
+                <i class="fas fa-download"></i> تصدير البيانات
+            </button>
+            <button class="control-btn import" onclick="document.getElementById('importFile').click()">
+                <i class="fas fa-upload"></i> استيراد البيانات
+            </button>
+            <input type="file" id="importFile" class="file-input" accept=".json" onchange="importData(this)">
+            <button class="control-btn reset" onclick="resetData()">
+                <i class="fas fa-undo"></i> إعادة تعيين
+            </button>
         </div>
 
         <div class="team-grid" id="teamGrid"></div>
@@ -489,11 +515,14 @@
         <i class="fas fa-plus"></i>
     </button>
 
+    <!-- Toast -->
+    <div class="toast" id="toast"><i class="fas fa-check-circle"></i> <span id="toastMsg"></span></div>
+
     <!-- Edit Modal -->
     <div class="modal-overlay" id="editModal">
         <div class="modal">
             <button class="modal-close" onclick="closeModal('editModal')"><i class="fas fa-times"></i></button>
-            <h2 class="modal-title">✏️ تعديل بيانات العضو</h2>
+            <h2 class="modal-title" id="editModalTitle">✏️ تعديل بيانات العضو</h2>
             <form id="editForm">
                 <input type="hidden" id="editId">
                 <div class="form-group">
@@ -547,11 +576,18 @@
                     <span class="accounts-badge" id="profileAccounts"></span>
                 </div>
             </div>
+            <div class="form-actions" style="margin-top:25px;">
+                <button class="btn-save" onclick="editFromProfile()"><i class="fas fa-edit"></i> تعديل البيانات</button>
+                <button class="btn-cancel" onclick="closeModal('profileModal')">إغلاق</button>
+            </div>
         </div>
     </div>
 
     <script>
-        let members = [
+        const STORAGE_KEY = 'bestTeam_members';
+        let currentProfileId = null;
+
+        const defaultMembers = [
             {
                 id: 1,
                 name: "أحمد محمد",
@@ -578,11 +614,54 @@
             }
         ];
 
+        // Load members from localStorage or use defaults
+        function loadMembers() {
+            try {
+                const stored = localStorage.getItem(STORAGE_KEY);
+                if (stored) {
+                    return JSON.parse(stored);
+                }
+            } catch (e) {
+                console.error('Error loading from localStorage:', e);
+            }
+            return [...defaultMembers];
+        }
+
+        // Save members to localStorage
+        function saveMembers(members) {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(members));
+            } catch (e) {
+                console.error('Error saving to localStorage:', e);
+                showToast('⚠️ تعذر حفظ البيانات - مساحة التخزين ممتلئة');
+            }
+        }
+
+        let members = loadMembers();
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
         function renderMembers() {
             const grid = document.getElementById('teamGrid');
             grid.innerHTML = '';
 
             let totalAccounts = 0;
+
+            if (members.length === 0) {
+                grid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: #888;">
+                        <i class="fas fa-users" style="font-size: 4rem; margin-bottom: 20px; opacity: 0.3;"></i>
+                        <h3 style="font-size: 1.5rem; margin-bottom: 10px;">لا يوجد أعضاء بعد</h3>
+                        <p>اضغط على زر + لإضافة عضو جديد</p>
+                    </div>
+                `;
+            }
 
             members.forEach(member => {
                 totalAccounts += parseInt(member.accounts);
@@ -617,18 +696,33 @@
                             <i class="fas fa-edit"></i> تعديل
                         </button>
                     </div>
+                    <div style="margin-top: 10px; text-align: center;">
+                        <button class="btn btn-delete" onclick="deleteMember(${member.id})">
+                            <i class="fas fa-trash"></i> حذف العضو
+                        </button>
+                    </div>
                 `;
                 grid.appendChild(card);
             });
 
             document.getElementById('totalMembers').textContent = members.length;
             document.getElementById('totalAccounts').textContent = totalAccounts;
+            document.getElementById('activeProjects').textContent = members.length > 0 ? Math.ceil(members.length * 1.5) : 0;
+        }
+
+        function deleteMember(id) {
+            if (!confirm('هل أنت متأكد من حذف هذا العضو؟')) return;
+            members = members.filter(m => m.id !== id);
+            saveMembers(members);
+            renderMembers();
+            showToast('🗑️ تم حذف العضو بنجاح');
         }
 
         function openProfile(id) {
             const member = members.find(m => m.id === id);
             if (!member) return;
 
+            currentProfileId = id;
             document.getElementById('profileAvatar').textContent = member.name.charAt(0);
             document.getElementById('profileName').textContent = member.name;
             document.getElementById('profileRole').textContent = member.role;
@@ -637,6 +731,11 @@
             document.getElementById('profileAccounts').innerHTML = `<i class="fas fa-user-circle"></i> ${member.accounts} حساب`;
 
             document.getElementById('profileModal').classList.add('active');
+        }
+
+        function editFromProfile() {
+            closeModal('profileModal');
+            setTimeout(() => openEditModal(currentProfileId), 300);
         }
 
         function openEditModal(id) {
@@ -649,6 +748,7 @@
             document.getElementById('editPrompt').value = member.prompt;
             document.getElementById('editPlan').value = member.plan;
             document.getElementById('editAccounts').value = member.accounts;
+            document.getElementById('editModalTitle').textContent = '✏️ تعديل بيانات العضو';
 
             document.getElementById('editModal').classList.add('active');
         }
@@ -660,31 +760,30 @@
             document.getElementById('editPrompt').value = '';
             document.getElementById('editPlan').value = '';
             document.getElementById('editAccounts').value = '';
-            document.querySelector('#editModal .modal-title').textContent = '➕ إضافة عضو جديد';
+            document.getElementById('editModalTitle').textContent = '➕ إضافة عضو جديد';
             document.getElementById('editModal').classList.add('active');
         }
 
         function closeModal(modalId) {
             document.getElementById(modalId).classList.remove('active');
-            if (modalId === 'editModal') {
-                setTimeout(() => {
-                    document.querySelector('#editModal .modal-title').textContent = '✏️ تعديل بيانات العضو';
-                }, 300);
-            }
         }
 
         document.getElementById('editForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
             const id = document.getElementById('editId').value;
-            const name = document.getElementById('editName').value;
-            const role = document.getElementById('editRole').value;
-            const prompt = document.getElementById('editPrompt').value;
-            const plan = document.getElementById('editPlan').value;
-            const accounts = document.getElementById('editAccounts').value;
+            const name = document.getElementById('editName').value.trim();
+            const role = document.getElementById('editRole').value.trim();
+            const prompt = document.getElementById('editPrompt').value.trim();
+            const plan = document.getElementById('editPlan').value.trim();
+            const accounts = parseInt(document.getElementById('editAccounts').value) || 0;
+
+            if (!name || !role || !prompt || !plan) {
+                showToast('⚠️ يرجى ملء جميع الحقول');
+                return;
+            }
 
             if (id) {
-                // Edit existing member
                 const member = members.find(m => m.id == id);
                 if (member) {
                     member.name = name;
@@ -692,31 +791,85 @@
                     member.prompt = prompt;
                     member.plan = plan;
                     member.accounts = accounts;
+                    showToast('✅ تم تحديث بيانات العضو بنجاح');
                 }
             } else {
-                // Add new member
                 const newId = members.length > 0 ? Math.max(...members.map(m => m.id)) + 1 : 1;
-                members.push({
-                    id: newId,
-                    name, role, prompt, plan, accounts
-                });
+                members.push({ id: newId, name, role, prompt, plan, accounts });
+                showToast('✅ تم إضافة العضو الجديد بنجاح');
             }
 
+            saveMembers(members);
             renderMembers();
             closeModal('editModal');
         });
 
+        // Export data as JSON file
+        function exportData() {
+            const dataStr = JSON.stringify(members, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `best-team-backup-${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('📥 تم تصدير البيانات بنجاح');
+        }
+
+        // Import data from JSON file
+        function importData(input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (Array.isArray(imported) && imported.length > 0) {
+                        members = imported;
+                        saveMembers(members);
+                        renderMembers();
+                        showToast('📤 تم استيراد البيانات بنجاح');
+                    } else {
+                        showToast('⚠️ ملف غير صالح');
+                    }
+                } catch (err) {
+                    showToast('⚠️ خطأ في قراءة الملف');
+                }
+            };
+            reader.readAsText(file);
+            input.value = '';
+        }
+
+        // Reset to default data
+        function resetData() {
+            if (!confirm('هل أنت متأكد من إعادة تعيين جميع البيانات؟ سيتم حذف جميع التعديلات.')) return;
+            members = [...defaultMembers];
+            saveMembers(members);
+            renderMembers();
+            showToast('🔄 تم إعادة تعيين البيانات');
+        }
+
         // Close modal on overlay click
         document.querySelectorAll('.modal-overlay').forEach(overlay => {
             overlay.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    this.classList.remove('active');
-                }
+                if (e.target === this) closeModal(this.id);
             });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay.active').forEach(m => closeModal(m.id));
+            }
         });
 
         // Initial render
         renderMembers();
+        showToast('✅ تم تحميل البيانات المحفوظة');
     </script>
 </body>
 </html>
