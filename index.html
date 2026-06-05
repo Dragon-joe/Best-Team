@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Best Team Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">🚀</div>
+        <div>
+          <h1>Best Team</h1>
+          <p>لوحة إدارة الفريق</p>
+        </div>
+      </div>
+      <nav class="side-nav">
+        <a class="active" href="#">الأعضاء</a>
+        <a href="#stats">الإحصائيات</a>
+        <a href="#cards">الملفات</a>
+      </nav>
+      <div class="side-note">البيانات محفوظة تلقائياً داخل المتصفح.</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <span class="eyebrow">Team Management</span>
+          <h2>إدارة الفريق والحسابات</h2>
+        </div>
+        <button class="btn primary" id="addMemberBtn">＋ إضافة عضو</button>
+      </header>
+
+      <section class="stats" id="stats">
+        <div class="stat-card"><span>عدد الأعضاء</span><strong id="membersCount">0</strong><small>عضو داخل الفريق</small></div>
+        <div class="stat-card highlight"><span>إجمالي الحسابات النشطة</span><strong id="totalAccounts">0</strong><small>حساب نشط موزع على الأعضاء</small></div>
+        <div class="stat-card"><span>المشاريع النشطة</span><strong id="activeProjects">0</strong><small>حسب خطط العمل</small></div>
+        <div class="stat-card"><span>متوسط الحسابات لكل عضو</span><strong id="avgAccounts">0</strong><small>متوسط تلقائي</small></div>
+      </section>
+
+      <section class="toolbar">
+        <input id="searchInput" type="search" placeholder="ابحث باسم العضو أو الخطة...">
+        <div class="tool-actions">
+          <button class="btn soft" id="exportBtn">تصدير</button>
+          <label class="btn soft file-label">استيراد<input type="file" id="importFile" accept="application/json"></label>
+          <button class="btn danger" id="resetBtn">إعادة تعيين</button>
+        </div>
+      </section>
+
+      <section id="cards" class="cards"></section>
+    </main>
+  </div>
+
+  <dialog id="memberModal" class="modal">
+    <form id="memberForm" class="modal-box">
+      <button type="button" class="x" id="closeModal">×</button>
+      <div class="avatar big" id="modalAvatar">ب</div>
+      <h2 id="modalTitle">تعديل البيانات</h2>
+      <input type="hidden" id="memberId">
+
+      <label for="name">اسم العضو</label>
+      <input id="name" required placeholder="مثال: بسمة">
+
+      <label for="role">التخصص</label>
+      <input id="role" required placeholder="Marketing Reddit">
+
+      <label for="prompt">Prompt الخاص</label>
+      <textarea id="prompt" rows="5" placeholder="اكتب البرومبت الخاص هنا"></textarea>
+
+      <label for="plan">خطة العمل</label>
+      <textarea id="plan" rows="8" placeholder="اكتب خطة العمل هنا"></textarea>
+
+      <label for="accounts">عدد الحسابات النشطة</label>
+      <input id="accounts" type="number" min="0" required>
+
+      <div class="modal-actions">
+        <button type="button" class="btn ghost" id="cancelBtn">إغلاق</button>
+        <button type="submit" class="btn primary">حفظ البيانات</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
